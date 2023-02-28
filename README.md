@@ -1,6 +1,6 @@
 # JS-Utility-Functions
 Useful JavaScript Utility Functions
-<br><br><br>
+<br><br>
 
 ## Table of contents
 
@@ -10,6 +10,10 @@ Useful JavaScript Utility Functions
   - [copyArray](#copyarray)
 - [Date and Time](#date-and-time)
   - [formatDate](#formatdate)
+  - [secToMin](#sectomin)
+  - [minToSec](#mintosec)
+- [String](#string)
+  - [capitalize](#capitalize)
 <br><br>
 
 
@@ -58,6 +62,7 @@ Copy array(HALF deep copy)
         return copied;
     }
 ```
+<br>
 <br><br>
 
 
@@ -93,6 +98,50 @@ format date and time to "YYYY-MM-DD HH:mm:ss" with or without Moment.js
     // with moment.js (moment should be installed and imported above)
     formatDate2 (date) {
         return moment(date).format('YYYY-MM-DD HH:mm:ss');
+    }
+```
+<br>
+
+
+### secToMin
+convert seconds to minutes
+```js
+    secToMin(sec) {
+        if (sec == null) return null;
+        try {
+            let secToInt = Number(sec);
+            return Math.ceil(secToInt / 60);
+        } catch (error) {
+            return null;
+        }
+    }
+```
+<br>
+
+### minToSec
+convert minutes to seconds
+```js
+    minToSec(min) {
+        if (min == null) return null;
+        try {
+            let minToInt = Number(min);
+            return minToInt
+        }
+    }
+```
+<br>
+
+<br><br>
+
+
+
+## String
+
+### capitalize
+capitalize the given string
+```js
+    capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
     }
 ```
 <br>
