@@ -8,6 +8,10 @@ Useful JavaScript Utility Functions
   - [isArray](#isarray)
   - [isEmpty](#isempty)
   - [copyArray](#copyarray)
+- [Object](#object)
+  - [deepCopy](#deepcopy)
+  - [convertObjKey](#convertobjkey)
+  - [convertObj](#convertobj)
 - [Date and Time](#date-and-time)
   - [formatDate](#formatdate)
   - [secToMin](#sectomin)
@@ -60,6 +64,39 @@ Copy array(HALF deep copy)
             copied.push(objectUtil.copy(o));
         });
         return copied;
+    }
+```
+<br>
+<br><br>
+
+
+## Object
+
+### deepCopy
+Convert object to a JSON string, and then parse the string back into a new object. This will create a new object with a completely new memory address. Keep in mind this will not work with objects that contain functions or circular references.
+```js
+    copy(obj) {
+        return JSON.parse(JSON.stringify(obj));
+    }
+```
+<br>
+
+### convertObjKey
+Convert the object keys by copying a property from one key to another in the same object.
+```js
+    convertObjKey(obj, fromKey, toKey) {
+        if (obj[fromKey]) obj[toKey] = obj[fromKey];
+    }
+```
+<br>
+
+### convertObj
+Copy all the properties from origin object to the target object.
+```js
+    convertObj(fromObj,  toObj) {
+        Object.keys(fromObj).forEach((key) => {
+            objUtil.convertObjKey(fromObj, key, toObj[key]);
+        });
     }
 ```
 <br>
