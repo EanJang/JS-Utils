@@ -18,6 +18,8 @@ Useful JavaScript Utility Functions
   - [minToSec](#mintosec)
 - [String](#string)
   - [capitalize](#capitalize)
+  - [isURL](#isurl)
+  - [isIP](#isip)
 <br><br>
 
 
@@ -181,4 +183,55 @@ capitalize the given string
         return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
     }
 ```
+<br>
+
+
+### isURL
+Check whether the passed string is a valid URL
+```js
+    isURL(str) {
+        const url_reg = ^(https?|ftp)://[^\s/$.?#].[^\s]*$;
+        return url_reg.test(str);
+    }
+```
+```sql
+    ^               # start of string
+    (https?|ftp)    # matches "http" or "https" or "ftp"
+    ://             # matches "://"
+    [^\s/$.?#]      # matches any character that is not whitespace, "/", "$", ".", "?", or "#"
+    .               # matches any character
+    [^\s]*          # matches zero or more of any character that is not whitespace
+    $               # end of string
+```
+<br>
+
+### isIP
+Check whether the passed value is a valid IPv4 address
+```js
+    isIp(str) {
+        const ip_reg = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        return ip_reg.test(str);
+        // return str.length === 0 || ip_reg.test(str); -> to allow empty string as a valid input for IP
+    }
+```
+```sql
+    ^                                       # start of string
+    (?:                                     # non-capturing group
+        (?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.   # matches an IP address octet (0-255) followed by a period, for the first three octets
+    ){3}                                    # repeats the previous group three times
+    (?:                                     # non-capturing group
+        25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]? # matches an IP address octet (0-255) for the fourth octet
+    )                                       # end of non-capturing group
+    $                                       # end of string
+```
+<br>
+
+To disallow leading zeros
+```js
+    isIp(str) {
+        const ip_reg = /^(?:(?:25[0-5]|2[0-4][0-9]|[1-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[1-9][0-9]?)$/;
+        return ip_reg.test(str);
+    }
+```
+
 <br>
