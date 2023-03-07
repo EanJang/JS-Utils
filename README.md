@@ -8,6 +8,8 @@ Useful JavaScript Utility Functions
   - [isArray](#isarray)
   - [isEmpty](#isempty)
   - [copyArray](#copyarray)
+  - [replaceArrProperties](#replacearrproperties)
+  - [getArrValues](#getarrvalues)
 - [Object](#object)
   - [deepCopy](#deepcopy)
   - [convertObjKey](#convertobjkey)
@@ -69,6 +71,72 @@ Copy array(HALF deep copy)
     }
 ```
 <br>
+
+### replaceArrProperties
+Create a new array by mapping the values of source array to a new set of keys specified in 'keyMappings' 
+```js
+    replaceArrProperties(sourceArr, keyMappings) {
+        let result = [];
+        sourceArr.forEach((item) => {
+            let tmp = {};
+            Object.keys(keyMappings).forEach((key) => {
+                tmp[keyMappings[key]] = item[key];
+            });
+            result.push(tmp);
+        });
+        return result;
+    }
+```
+<br>
+
+Example of how you might use this function:
+
+```js
+    const sourceArr = [
+      { id: 1, name: 'Alice', age: 30 },
+      { id: 2, name: 'Bob', age: 35 },
+      { id: 3, name: 'Charlie', age: 40 },
+    ];
+    const keyMappings = { id: 'userId', name: 'userName', age: 'userAge' };
+    
+    const result = replaceArr(sourceArr, keyMappings);
+    console.log(result);
+    
+    // Output:
+    // [
+    //   { userId: 1, userName: 'Alice', userAge: 30 },
+    //   { userId: 2, userName: 'Bob', userAge: 35 },
+    //   { userId: 3, userName: 'Charlie', userAge: 40 }
+    // ]
+```
+
+<br>
+
+### getArrValues
+Create a new array containing only 'value' property from the source array
+```js
+    getArrValues(arr) {
+        let reducer = function(accumulator, item) {
+            accumulator.push(item.value);
+            return accumulator;
+        };
+        let result = arr.reduce(reducer, []);
+        return result;
+    }
+```
+<br>
+
+Example:
+
+```js
+    let arr = [{value: 1},  {value: 2},  {value: 3}];
+
+    let result = getArrValue(arr);
+    console.log(result); // Output: [1, 2, 3]
+```
+
+<br>
+
 <br><br>
 
 
