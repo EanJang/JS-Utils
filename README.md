@@ -20,6 +20,8 @@ Useful JavaScript Utility Functions
   - [minToSec](#mintosec)
 - [String](#string)
   - [capitalize](#capitalize)
+  - [kebabToPascal](#kebabtopascal)
+  - [kebabToCamel](#kebabtocamel)
   - [isURL](#isurl)
   - [isIP](#isip)
 <br><br>
@@ -253,6 +255,32 @@ capitalize the given string
 ```
 <br>
 
+### kebabToPascal
+Convert kebab-cased string to PascalCase
+```js
+    kebabToPascal(str) {
+        str = str
+            .split('-')
+            .map(v => v[0].toUpperCase() + v.slice(1))
+            .join('');
+        return str;
+    }
+```
+<br>
+
+### kebabToCamel
+Convert kebab-cased string to camelCase
+```js
+    kebabToCamel(str) {
+        str = str
+            .split('-')
+            .map(v => v[0].toUpperCase() + v.slice(1))
+            .join('');
+        str = str[0].toLowerCase() + str.slice(1);
+        return str;
+    }
+```
+<br>
 
 ### isURL
 Check whether the passed string is a valid URL
