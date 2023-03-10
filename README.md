@@ -22,6 +22,7 @@ Useful JavaScript Utility Functions
   - [capitalize](#capitalize)
   - [kebabToPascal](#kebabtopascal)
   - [kebabToCamel](#kebabtocamel)
+  - [toKebab](#tokebab)
   - [isURL](#isurl)
   - [isIP](#isip)
 <br><br>
@@ -277,6 +278,19 @@ Convert kebab-cased string to camelCase
             .map(v => v[0].toUpperCase() + v.slice(1))
             .join('');
         str = str[0].toLowerCase() + str.slice(1);
+        return str;
+    }
+```
+<br>
+
+### toKebab
+Convert camelCased or PascalCased string to kebab-case
+```js
+    toKebab(str) {
+        str = str
+            .split(/(?=[A-Z])/)
+            .map(v => v.toLowerCase())
+            .join('-');
         return str;
     }
 ```
